@@ -13,18 +13,38 @@ class Flurorouter {
 
   // dashboard
   static String dashboardRoute = '/dashboard';
+  static String iconsRoute = '/dashboard/icons';
+  static String blankRoute = '/dashboard/blank';
 
   // Auth Routes
   static void configureRoutes() {
+    //AuthRoutes
     router.define(rootRoute,
         handler: AdminHandlers.login, transitionType: TransitionType.none);
     router.define(loginRoute,
         handler: AdminHandlers.login, transitionType: TransitionType.none);
     router.define(registerRoute,
         handler: AdminHandlers.register, transitionType: TransitionType.none);
+    //Dashboard
     router.define(dashboardRoute,
         handler: DashboardHandlers.dashboard,
+        transitionType: TransitionType.fadeIn);
+    router.define(iconsRoute,
+        handler: DashboardHandlers.icons,
+        transitionType: TransitionType.fadeIn);
+    router.define(blankRoute,
+        handler: DashboardHandlers.blank,
         transitionType: TransitionType.fadeIn);
     router.notFoundHandler = NoPageFoundHandlers.noPageFound;
   }
 }
+
+/* para crear una nueva vista 
+1. Crear la ruta
+2. Manejador de la ruta
+3. Manejador de la ruta devolver la vista deseada
+
+
+..._hanlder por cada layout
+router define por cada view
+*/
