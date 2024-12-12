@@ -71,11 +71,10 @@ class _DesktopBody extends StatelessWidget {
     return Container(
       width: size.width,
       height: size.height * .95,
-      color: Colors.red,
       child: Row(
         children: [
           // twiter background
-          CustomBackground(),
+          const Expanded(child: CustomBackground()),
           // view container
           Container(
             width: 600,
