@@ -6,11 +6,14 @@ class RegisterFormProvider extends ChangeNotifier {
   String email = '';
   String password = '';
 
-  void validateRegisterForm() {
+  bool validateRegisterForm() {
     if (formKey.currentState!.validate()) {
       print('Form valid ... register');
+      print('$email === $password');
+      return true;
     } else {
       print('Form not valid');
+      return false;
     }
   }
 }

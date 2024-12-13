@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/providers/auth_provider.dart';
 import 'package:admin_dashboard/providers/register_form_provider.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/ui/buttons/custom_outlined_button.dart';
@@ -12,6 +13,7 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final authProvider = Provider.of<AuthProvider>(context);
     return ChangeNotifierProvider(
       create: (context) => RegisterFormProvider(),
       child: Builder(builder: (context) {
@@ -30,7 +32,7 @@ class RegisterView extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
-                        onChanged: (value) => registerFormProvider.name,
+                        onChanged: (value) => registerFormProvider.name = value,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Ingrese un nombre';
@@ -47,7 +49,8 @@ class RegisterView extends StatelessWidget {
                         height: 20,
                       ),
                       TextFormField(
-                        onChanged: (value) => registerFormProvider.email,
+                        onChanged: (value) =>
+                            registerFormProvider.email = value,
                         validator: (value) {
                           if (!EmailValidator.validate(value ?? '')) {
                             return 'Email no valido';
@@ -64,7 +67,8 @@ class RegisterView extends StatelessWidget {
                         height: 20,
                       ),
                       TextFormField(
-                        onChanged: (value) => registerFormProvider.password,
+                        onChanged: (value) =>
+                            registerFormProvider.password = value,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Ingrese una contraseña';
@@ -86,9 +90,17 @@ class RegisterView extends StatelessWidget {
                       ),
                       CustomOutlinedButton(
                         onPressed: () {
-                          registerFormProvider.validateRegisterForm();
+                          final validForm =
+                              registerFormProvider.validateRegisterForm();
+                          if (!validForm) return;
+                          final authProvider =
+                              Provider.of<AuthProvider>(context, listen: false);
+                          authProvider.register(
+                              registerFormProvider.name,
+                              registerFormProvider.email,
+                              registerFormProvider.password);
                         },
-                        text: 'Ingresar',
+                        text: 'Crear cuenta',
                       ),
                       LinkText(
                         text: 'Ir al login',

@@ -37,6 +37,8 @@ class LoginView extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFormField(
+                          onFieldSubmitted: (_) =>
+                              onFormSubmit(loginFormProvider, authProvider),
                           validator: (value) {
                             if (!EmailValidator.validate(value ?? '')) {
                               return 'Email no valido';
@@ -54,6 +56,8 @@ class LoginView extends StatelessWidget {
                           height: 20,
                         ),
                         TextFormField(
+                          onFieldSubmitted: (_) =>
+                              onFormSubmit(loginFormProvider, authProvider),
                           onChanged: (value) =>
                               loginFormProvider.password = value,
                           validator: (value) {
@@ -76,13 +80,8 @@ class LoginView extends StatelessWidget {
                           height: 20,
                         ),
                         CustomOutlinedButton(
-                          onPressed: () {
-                            final isValid = loginFormProvider.validateForm();
-                            if (isValid) {
-                              authProvider.login(loginFormProvider.email,
-                                  loginFormProvider.password);
-                            }
-                          },
+                          onPressed: () =>
+                              onFormSubmit(loginFormProvider, authProvider),
                           text: 'Ingresar',
                         ),
                         LinkText(
@@ -98,5 +97,13 @@ class LoginView extends StatelessWidget {
             ),
           );
         }));
+  }
+
+  void onFormSubmit(
+      LoginFormProvider loginFormProvider, AuthProvider authProvider) {
+    final isValid = loginFormProvider.validateForm();
+    if (isValid) {
+      authProvider.login(loginFormProvider.email, loginFormProvider.password);
+    }
   }
 }
