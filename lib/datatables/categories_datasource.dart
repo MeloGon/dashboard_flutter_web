@@ -49,6 +49,7 @@ class CategoriesDatasource extends DataTableSource {
                           await Provider.of<CategoriesProvider>(context,
                                   listen: false)
                               .deleteCategory(category.id!);
+
                           Navigator.pop(context);
                         },
                         child: const Text('Si,borrar'))

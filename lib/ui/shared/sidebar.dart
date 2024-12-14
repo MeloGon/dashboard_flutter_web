@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key});
 
-  void navigateTo(String routeName) {
-    NavigationService.navigateTo(routeName);
+  void replaceTo(String routeName) {
+    NavigationService.replaceTo(routeName);
     SidemenuProvider.closeMenu();
   }
 
@@ -36,7 +36,7 @@ class Sidebar extends StatelessWidget {
             icon: Icons.compass_calibration_outlined,
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
-            onPressed: () => navigateTo(Flurorouter.dashboardRoute),
+            onPressed: () => replaceTo(Flurorouter.dashboardRoute),
           ),
           MenuItem(
               text: 'Order',
@@ -53,7 +53,7 @@ class Sidebar extends StatelessWidget {
             icon: Icons.layers_outlined,
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.categoriesRoute,
-            onPressed: () => navigateTo(Flurorouter.categoriesRoute),
+            onPressed: () => replaceTo(Flurorouter.categoriesRoute),
           ),
           MenuItem(
               text: 'Products',
@@ -78,7 +78,7 @@ class Sidebar extends StatelessWidget {
             text: 'Icons',
             icon: Icons.list_alt_outlined,
             isActive: sideMenuProvider.currentPage == Flurorouter.iconsRoute,
-            onPressed: () => navigateTo(Flurorouter.iconsRoute),
+            onPressed: () => replaceTo(Flurorouter.iconsRoute),
           ),
           MenuItem(
               text: 'Marketing',
@@ -94,7 +94,7 @@ class Sidebar extends StatelessWidget {
             text: 'Blank',
             icon: Icons.post_add_outlined,
             isActive: sideMenuProvider.currentPage == Flurorouter.blankRoute,
-            onPressed: () => navigateTo(Flurorouter.blankRoute),
+            onPressed: () => replaceTo(Flurorouter.blankRoute),
           ),
           const SizedBox(
             height: 50,
